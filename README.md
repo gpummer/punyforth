@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/zeroflag/punyforth.svg?branch=master)](https://travis-ci.org/zeroflag/punyforth)
+[![Build Status](https://travis-ci.org/zeroflag/punyforth.svg?branch=master)](https://travis-ci.org/zeroflag/punyforth) 
 
 # Punyforth
 
@@ -857,5 +857,5 @@ uart-set-bps ( bps uart-number -- )
 
 Attila Magyar
 
-[![Twitter Follow](https://img.shields.io/twitter/url/http/shields.io.svg?style=social&label=%40zeroflag&maxAge=2592000?style=flat-square)](https://twitter.com/zeroflag)
+[![Twitter Follow](https://img.shields.io/twitter/url/http/shields.io.svg?style=social&label=%40zeroflag&maxAge=2592000?style=flat-square)](https://twitter.com/zeroflag) [![Gitter chat](https://badges.gitter.im/gitterHQ/gitter.png)](https://gitter.im/punyforth/Lobby)
 
