@@ -117,9 +117,9 @@ BUFFER_SIZE byte-array: screen-output
 
 : display-on ( -- )
     RST GPIO_HIGH gpio-write
-    1 delay
+    1 ms
     RST GPIO_LOW gpio-write
-    10 delay
+    10 ms
     RST GPIO_HIGH gpio-write ;
 
 : display-send-init-sequence ( -- )

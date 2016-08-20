@@ -42,14 +42,9 @@ struct
   cell field: .height
 constant: Rect
 
-: new-rect Rect create: allot does> ;
+: new-rect Rect create: allot ;
 : area ( rect -- area ) dup .width @ swap .height @ * ;
 new-rect r1
-
-: bench ( ntimes -- sec )
-    time swap
-    0 do 10 factorial drop loop
-    time swap - ;
 
 variable: test_var1
 variable: test_var2
@@ -336,6 +331,15 @@ B
 : test:core-array   
    5 0 do i i test_numbers ! loop
    5 0 do i test_numbers @ i =assert loop ;
+
+create: seq1 1 , 2 , 3 ,
+create: seq2 4 c, 5 c,
+: test:core-create
+    seq1 0 cells + @ 1 =assert
+    seq1 1 cells + @ 2 =assert
+    seq1 2 cells + @ 3 =assert
+    seq2 0 + c@ 4 =assert
+    seq2 1 + c@ 5 =assert ;
 
 3 buffer: buf1
 : test:core-buffer

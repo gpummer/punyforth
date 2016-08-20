@@ -1,20 +1,17 @@
 #include "esp/gpio.h"
+#include "pwm.h"
 #include "espressif/esp_common.h"
 #include "forth_evt.h"
 
-#define FORTH_TRUE -1
-#define FORTH_FALSE 0
-
-int forth_gpio_mode(int num, int dir) { 
+void forth_gpio_mode(int num, int dir) { 
     gpio_direction_t d;
     switch (dir) {
         case 1: d = GPIO_INPUT; break;
         case 2: d = GPIO_OUTPUT; break;
         case 3: d = GPIO_OUT_OPEN_DRAIN; break;
-        default: return FORTH_FALSE;
+        default: return;
     }
     gpio_enable(num, d); 
-    return FORTH_TRUE;
 }
 
 void forth_gpio_write(int num, int bool_set) { 
@@ -29,6 +26,14 @@ void forth_gpio_set_interrupt(int num, int int_type) {
     gpio_set_interrupt(num, int_type);
 }
 
+void forth_pwm_freq(int freq) {
+    pwm_set_freq((uint16_t) (freq & 0xFFFF));
+}
+
+void forth_pwm_duty(int duty) {
+    pwm_set_duty((uint16_t) (duty & 0xFFFF));
+}
+
 void __attribute__((weak)) IRAM gpio_interrupt_handler(void) {
     uint32_t status_reg = GPIO.STATUS;
     GPIO.STATUS_CLEAR = status_reg;   
@@ -39,7 +44,7 @@ void __attribute__((weak)) IRAM gpio_interrupt_handler(void) {
         if (FIELD2VAL(GPIO_CONF_INTTYPE, GPIO.CONF[gpio_idx])) {
             struct forth_event event = {
                 .event_type = EVT_GPIO,
-                .event_time = xTaskGetTickCountFromISR(),
+                .event_time = xTaskGetTickCountFromISR() * portTICK_RATE_MS,
                 .event_payload = gpio_idx,
                 .event_time_us = sdk_system_get_time()
             };

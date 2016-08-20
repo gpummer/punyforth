@@ -24,7 +24,7 @@ defer: motion-detected
     { .payload @ PIR_PIN = } bi and ;
 
 : recent-event? ( event -- bool )
-    time swap .time @ - 80 < ;
+    ms@ swap .time @ - 80 < ;
     
 : motion ( -- )
     print: 'motion detected at ' event .time ? cr

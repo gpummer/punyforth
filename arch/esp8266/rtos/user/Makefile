@@ -1,3 +1,3 @@
 PROGRAM=punyforth
-EXTRA_COMPONENTS = extras/dhcpserver
+EXTRA_COMPONENTS = extras/dhcpserver extras/pwm
 include ../../../../../../common.mk

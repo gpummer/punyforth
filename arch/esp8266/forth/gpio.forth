@@ -14,9 +14,9 @@
     GPIO_OUT gpio-mode
     dup
     GPIO_HIGH gpio-write
-    250 delay
+    250 ms
     GPIO_LOW gpio-write
-    250 delay ;
+    250 ms ;
     
 : times-blink ( pin ntimes -- )
     0 do

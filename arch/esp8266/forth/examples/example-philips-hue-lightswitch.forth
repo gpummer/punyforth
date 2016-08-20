@@ -7,22 +7,22 @@ BUTTON_HALL GPIO_INTTYPE_EDGE_NEG gpio-set-interrupt
 BUTTON_BEDROOM GPIO_IN gpio-mode
 BUTTON_BEDROOM GPIO_INTTYPE_EDGE_NEG gpio-set-interrupt
 
-80 constant: DEBOUNCE_TIME \ 0.8 sec
+800 constant: DEBOUNCE_TIME \ 0.8 sec
 0 init-variable: last-hall-event
 0 init-variable: last-bedroom-event
 
 Event buffer: event
 
 : toggle-hall ( -- )
-    time last-hall-event @ - DEBOUNCE_TIME > if
+    ms@ last-hall-event @ - DEBOUNCE_TIME > if
         HALL toggle
-        time last-hall-event !
+        ms@ last-hall-event !
     then ;
 
 : toggle-bedroom ( -- )
-    time last-bedroom-event @ - DEBOUNCE_TIME > if
+    ms@ last-bedroom-event @ - DEBOUNCE_TIME > if
         BEDROOM toggle
-        time last-bedroom-event !
+        ms@ last-bedroom-event !
     then ;
 
 : switch-loop ( task -- )

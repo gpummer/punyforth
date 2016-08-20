@@ -131,8 +131,8 @@ defprimitive "0>",2,gt0,REGULAR
     DPUSH a9
     NEXT
 
-defprimitive "time",4,time,REGULAR
-    CCALL forth_time
+defprimitive "ms@",3,msat,REGULAR
+    CCALL forth_time_ms
     DPUSH a2
     NEXT
 
@@ -171,9 +171,33 @@ defprimitive "gpio-read",9,gpioread,REGULAR
     DPUSH a2
     NEXT
 
-defprimitive "delay",5,delay,REGULAR
+defprimitive "pwm-init",8,pwminit,REGULAR
+    DPOP a2                     // pins array
+    DPOP a3                     // number of pins in array
+    CCALL pwm_init
+    NEXT
+
+defprimitive "pwm-freq",8,pwmfreq,REGULAR
+    DPOP a2                     // freq 16b
+    CCALL forth_pwm_freq
+    NEXT
+
+defprimitive "pwm-duty",8,pwmduty,REGULAR
+    DPOP a2                     // duty 16b
+    CCALL forth_pwm_duty
+    NEXT
+
+defprimitive "pwm-start",9,pwmstart,REGULAR
+    CCALL pwm_start
+    NEXT
+
+defprimitive "pwm-stop",8,pwmstop,REGULAR
+    CCALL pwm_stop
+    NEXT
+
+defprimitive "ms",2,ms,REGULAR
     DPOP a2                     // millis to wait
-    CCALL forth_delay
+    CCALL forth_delay_ms
     NEXT
 
 defprimitive "netcon-set-recvtimeout",22,netcon_set_recvtimeout,REGULAR 
@@ -407,12 +431,12 @@ defprimitive "osfreemem",9,osfreemem,REGULAR
     DPUSH a2                   // free heap size in bytes
     NEXT
 
-defprimitive "time-us",7,timeus,REGULAR
-    CCALL forth_time_us
+defprimitive "us@",3,usat,REGULAR
+    CCALL sdk_system_get_time
     DPUSH a2 // clock time in us
     NEXT
 
-defprimitive "delay-us",8,delayus,REGULAR
+defprimitive "us",2,us,REGULAR
     DPOP a2                     // us to wait
     CCALL forth_delay_us
     NEXT

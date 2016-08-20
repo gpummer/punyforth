@@ -684,7 +684,7 @@ The Wi-Fi settings are persistently stored by the ESP8266, there is no need to s
 2 constant: PIN
 PIN GPIO_OUT gpio-mode
 PIN GPIO_HIGH gpio-write
-250 delay
+250 ms
 PIN GPIO_LOW gpio-write
 ```
 
@@ -829,7 +829,7 @@ task: task-counter
     activate                              \ actiavte task
     100 0 do 
         i . cr 
-        500 delay
+        500 ms
     loop
     deactivate ;                          \ deactivate task
 
@@ -847,7 +847,7 @@ freemem ( -- bytes )
 osfreemem ( -- bytes ) 
 
 \ Blocks all running tasks for the specified number of millisecond.
-delay ( msec -- ) 
+ms ( msec -- ) 
 
 \ Sets the baud rate of the specied uart.
 uart-set-bps ( bps uart-number -- ) 

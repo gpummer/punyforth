@@ -60,6 +60,6 @@ exception: EIRC
             irc-con @ netcon-dispose
             0 irc-con !
         then
-        5000 delay
+        5000 ms
     again
     deactivate ;

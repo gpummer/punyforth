@@ -14,8 +14,7 @@ constant: RingBuf
     .capacity ! ;
 
 : ringbuf: ( capacity ) ( -- ringbuffer )
-    create: ringbuf drop
-    does> ;
+    create: ringbuf drop ;
 
 : ringbuf-size ( ringbuffer -- n ) .size @ ;
 
